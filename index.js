@@ -5,8 +5,12 @@ const cp = require('child_process');
 const express = require("express");
 const ytdl = require("ytdl-core");
 const ffmpeg = require('ffmpeg-static');
+const cors = require('cors');
+
+require('dotenv').config();
 
 const app = express();
+app.use(cors())
 
 // OBTENER LOS FORMATOS DISPONIBLES DEL VIDEO
 app.get('/video-formats', async (req, res) => {
@@ -14,7 +18,7 @@ app.get('/video-formats', async (req, res) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   const info = await ytdl.getInfo(videoUrl);
-  console.log(info);
+  
   let formats = info.formats.map(format => format.qualityLabel).filter(f => f !== null)
   let results = []
   for (let f of formats) {
@@ -165,6 +169,8 @@ app.get('/download/video', async (req, res) => {
 
 })
 
-app.listen(3000, () => {
-  console.log('Servidor iniciado en el puerto 3000');
+const port = process.env.PORT
+
+app.listen(port, () => {
+  console.log(`Servidor iniciado en el puerto ${port}`);
 });
