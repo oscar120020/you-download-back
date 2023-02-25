@@ -18,7 +18,7 @@ app.get('/video-formats', async (req, res) => {
   const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
   const info = await ytdl.getInfo(videoUrl);
-  
+
   let formats = info.formats.map(format => format.qualityLabel).filter(f => f !== null)
   let results = []
   for (let f of formats) {
@@ -45,8 +45,8 @@ app.get('/download/audio', async (req, res) => {
   const info = await ytdl.getInfo(videoUrl);
 
   // Configurar las cabeceras de respuesta para que el archivo sea descargable
-  res.setHeader('Content-Type', 'audio/mp3');
-  res.setHeader('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp3"`);
+  // res.setHeader('Content-Type', 'audio/mp3');
+  // res.setHeader('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp3"`);
 
   const audioStream = ytdl(videoUrl, {quality: 'highestaudio'})
 
@@ -110,8 +110,8 @@ app.get('/download/video', async (req, res) => {
   const info = await ytdl.getInfo(videoUrl);
 
   // Configurar las cabeceras de respuesta para que el archivo sea descargable
-  res.setHeader('Content-Type', 'video/mp4');
-  res.setHeader('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp4"; duration=${info.videoDetails.lengthSeconds}`);
+  // res.setHeader('Content-Type', 'video/mp4');
+  // res.setHeader('Content-Disposition', `attachment; filename="${info.videoDetails.title}.mp4"; duration=${info.videoDetails.lengthSeconds}`);
   
   // create video and audio streams
   let videoStream = ytdl.downloadFromInfo(info, {filter: format => format.qualityLabel === videoformat})
