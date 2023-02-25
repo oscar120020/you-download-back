@@ -1,0 +1,17 @@
+{
+  "name": "you-download",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.18.2",
+    "ffmpeg-static": "^5.1.0",
+    "ytdl-core": "^4.11.2"
+  }
+}
