@@ -12,12 +12,29 @@ require('dotenv').config();
 const app = express();
 app.use(cors())
 
+const mapSeconds = (seconds) => {
+  const res = Number(seconds) / 60
+
+  if(!res.toString().includes('.')){
+    return `${res}:00`
+  }
+
+  let int = res.toString().split('.')[0]
+  let residuo = (Number(seconds) % 60).toString()
+
+  if (residuo.length === 1) {
+    residuo = `0${residuo}`;
+  }
+
+  return `${int}:${residuo}`
+}
+
 // OBTENER LOS FORMATOS DISPONIBLES DEL VIDEO
 app.get('/video-formats', async (req, res) => {
-  const videoId = req.query.videoId; // ID del video de YouTube
-  const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
+  const videoURL = req.query.videoURL; // ID del video de YouTube
+  // const videoUrl = `https://www.youtube.com/watch?v=${videoId}`;
 
-  const info = await ytdl.getInfo(videoUrl);
+  const info = await ytdl.getInfo(videoURL);
 
   let formats = info.formats.map(format => format.qualityLabel).filter(f => f !== null)
   let results = []
@@ -29,11 +46,15 @@ app.get('/video-formats', async (req, res) => {
 
   const miniatures = info.videoDetails.thumbnails
   const title = info.videoDetails.title
+  const videoId = info.videoDetails.videoId
+  const lengthSeconds = mapSeconds(info.videoDetails.lengthSeconds)
 
   return res.json({
     formats: results,
     miniatures,
-    title
+    title,
+    videoId,
+    lengthSeconds
   })
 })
 
