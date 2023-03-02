@@ -79,7 +79,7 @@ app.get("/download/audio", async (req, res) => {
     // create folder to storage the video
     const audioPath = path.join(
       __dirname,
-      (Math.random() + 1).toString(36).substring(5)
+      'temp', (Math.random() + 1).toString(36).substring(5)
     );
     fs.mkdirSync(audioPath);
 
@@ -168,7 +168,7 @@ app.get("/download/video", async (req, res) => {
     // create folder to storage the video
     const videoPath = path.join(
       __dirname,
-      (Math.random() + 1).toString(36).substring(5)
+      'temp', (Math.random() + 1).toString(36).substring(5)
     );
     fs.mkdirSync(videoPath);
 
