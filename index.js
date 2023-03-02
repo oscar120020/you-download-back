@@ -77,8 +77,8 @@ app.get("/download/audio", async (req, res) => {
     const audioStream = ytdl(videoUrl, { quality: "highestaudio" });
 
     // create folder to storage the video
-    const audioPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
-    fs.mkdirSync(audioPath);
+    // const audioPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
+    // fs.mkdirSync(audioPath);
 
     // create the ffmpeg process for muxing
     let ffmpegProcess = cp.spawn(
@@ -163,8 +163,8 @@ app.get("/download/video", async (req, res) => {
     let audioStream = ytdl.downloadFromInfo(info, { quality: "highestaudio" });
 
     // create folder to storage the video
-    const videoPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
-    fs.mkdirSync(videoPath);
+    // const videoPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
+    // fs.mkdirSync(videoPath);
 
     // create the ffmpeg process for muxing
     let ffmpegProcess = cp.spawn(
