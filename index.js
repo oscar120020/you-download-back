@@ -77,10 +77,7 @@ app.get("/download/audio", async (req, res) => {
     const audioStream = ytdl(videoUrl, { quality: "highestaudio" });
 
     // create folder to storage the video
-    const audioPath = path.join(
-      __dirname,
-      'temp', (Math.random() + 1).toString(36).substring(5)
-    );
+    const audioPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
     fs.mkdirSync(audioPath);
 
     // create the ffmpeg process for muxing
@@ -133,9 +130,9 @@ app.get("/download/audio", async (req, res) => {
         res.sendFile(path.join(audioPath, "out.mp3"));
 
         // Delete temp folder
-        setTimeout(() => {
-          fs.rmSync(audioPath, { recursive: true, force: true });
-        }, 2000);
+        // setTimeout(() => {
+        //   fs.rmSync(audioPath, { recursive: true, force: true });
+        // }, 2000);
       }
     });
 
@@ -166,10 +163,7 @@ app.get("/download/video", async (req, res) => {
     let audioStream = ytdl.downloadFromInfo(info, { quality: "highestaudio" });
 
     // create folder to storage the video
-    const videoPath = path.join(
-      __dirname,
-      'temp', (Math.random() + 1).toString(36).substring(5)
-    );
+    const videoPath = '/temp/' + (Math.random() + 1).toString(36).substring(5)
     fs.mkdirSync(videoPath);
 
     // create the ffmpeg process for muxing
@@ -227,9 +221,9 @@ app.get("/download/video", async (req, res) => {
         res.sendFile(path.join(videoPath, "out.mp4"));
 
         // Delete temp folder
-        setTimeout(() => {
-          fs.rmSync(videoPath, { recursive: true, force: true });
-        }, 2000);
+        // setTimeout(() => {
+        //   fs.rmSync(videoPath, { recursive: true, force: true });
+        // }, 2000);
       }
     });
 
