@@ -249,3 +249,5 @@ const port = process.env.PORT;
 app.listen(port, () => {
   console.log(`Servidor iniciado en el puerto ${port}`);
 });
+
+exports.module = app;
