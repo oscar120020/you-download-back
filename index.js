@@ -98,7 +98,7 @@ app.get("/download/audio", async (req, res) => {
         "-c:v",
         "copy",
         // output mp4
-        `${path.join(audioPath, "out.mp3")}`,
+        `${path.join("/temp/", "out.mp3")}`,
       ],
       {
         // no popup window for Windows users
@@ -127,7 +127,7 @@ app.get("/download/audio", async (req, res) => {
       );
       if (code === 0) {
         // Send video
-        res.sendFile(path.join(audioPath, "out.mp3"));
+        res.sendFile(path.join("/temp/", "out.mp3"));
 
         // Delete temp folder
         // setTimeout(() => {
@@ -188,7 +188,7 @@ app.get("/download/video", async (req, res) => {
         "-c:v",
         "copy",
         // output mp4
-        `${path.join(videoPath, "out.mp4")}`,
+        `${path.join("/temp/", "out.mp4")}`,
       ],
       {
         // no popup window for Windows users
@@ -218,7 +218,7 @@ app.get("/download/video", async (req, res) => {
       );
       if (code === 0) {
         // Send video
-        res.sendFile(path.join(videoPath, "out.mp4"));
+        res.sendFile(path.join("/temp/", "out.mp4"));
 
         // Delete temp folder
         // setTimeout(() => {
